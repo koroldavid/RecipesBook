@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React                               from 'react';
+import { Router, Switch, Redirect, Route } from 'react-router-dom';
+import history                             from './history';
+import MainLayout                          from './layout/MainLayout';
+import Recepts                            from './pages/Recepts';
+import ReceptDetail                        from './pages/ReceptDetail';
 
-function App() {
+function dummyLayout(props) {
+  return props.children;
+}
+
+function AppRoute({ component: Page, layout, ...rest }) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Route
+          {...rest}
+          render={props => {
+              const Layout = layout ? layout : dummyLayout;
+
+              return (
+                  <MainLayout {...props}>
+                      <Layout {...props}>
+                          <Page {...props} />
+                      </Layout>
+                  </MainLayout>
+              );
+          }}
+      />
   );
 }
 
-export default App;
+export default class App extends React.Component {
+  render() {
+      return (
+          <Router history={history}>
+              <Switch>
+                    <AppRoute  component={Recepts} path='/recepts' exact />
+                    <AppRoute  component={ReceptDetail} path='/recept/:id' exact />
+
+                    <Redirect from='*' to='/recepts' />
+              </Switch>
+          </Router>
+      );
+  }
+}

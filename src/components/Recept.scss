@@ -1,0 +1,112 @@
+.Recept {
+    border: 1px solid #1890ff;
+    margin-left: 5px;
+    margin-top: 5px;
+    border-radius: 15px;
+    padding: 15px;
+    min-height: 200px;
+    height: 50%;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .Recept_Title {
+        margin-top: 10px;
+        font-size: 32px;
+        color: #1890ff;
+        text-align: center;
+    }
+
+    .Recept_Description {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .Recept_Guide, .Recept_Ingredients {
+        min-height: 70px;
+        font-size: 14px;
+        align-self: start;
+        width: 100%;
+
+        border-top: 1px solid #ff1878;
+
+        display: flex;
+        align-items: center;
+    }
+
+    .Recept_Guide {
+        margin-top: 10px;
+    }
+
+    .Recept_Ingredients {
+        border-bottom: 1px solid #ff1878;
+    }
+
+    .Recept_Created {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        font-size: 12px;
+    }
+
+    .Recept_Delete {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+
+        svg {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    .Recept_Options {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        flex-grow: 1;
+        margin-top: 15px;
+
+        .CRUDER_UpdateModal, .CRUDER_Link {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+
+            button {
+                margin-bottom: 5px;
+            }
+        }
+
+        .CRUDER_UpdateModal Button {
+            margin-right: 10px;
+            
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    .Recept {
+        width: calc(33.5% - 9px);
+    }
+}
+
+@media (max-width: 1200px) and (min-width: 850px) {
+    .Recept {
+        width: calc(34% - 12px);
+    }
+}
+
+@media (max-width: 850px) and (min-width: 575px) {
+    .Recept {
+        width: calc(50% - 10px);
+    }
+}
+
+@media (max-width: 575px) {
+    .Recept {
+        width: 75%;
+    }
+}
