@@ -1,6 +1,6 @@
 import ApiClient  from './ApiClient.js';
 
-import ReceptsAPI from './Recepts.js';
+import RecipesAPI from './Recipes.js';
 
 
 export default function ({ apiEndpoint, apiPrefix } = {}) {
@@ -10,6 +10,6 @@ export default function ({ apiEndpoint, apiPrefix } = {}) {
 
     return {
         apiClient     : api,
-        recepts       : new ReceptsAPI({ apiClient: api })
+        recipes       : new RecipesAPI({ apiClient: api })
     }
 }

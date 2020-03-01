@@ -22,12 +22,14 @@ export default class ApiClient {
             headers,
             withCredentials : true,
             crossDomain     : false,
-            body            : method !== 'GET' ? JSON.stringify({ data: body }) : undefined
+            body            : method !== 'GET' ? JSON.stringify(body) : undefined
         };
 
         const response = await fetch(path, options);
         const json     = await response.json();
 
+        if (json.status === 'error') throw json;
+        
         return json;
     }
 

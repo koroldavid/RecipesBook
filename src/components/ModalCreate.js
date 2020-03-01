@@ -11,7 +11,7 @@ const INITIAL_STATE = {
     error     : {}
 };
 
-class ModalType extends PureComponent {
+export default class ModalCreate extends PureComponent {
     static propTypes = {
         schema : PropTypes.object
     }
@@ -28,6 +28,7 @@ class ModalType extends PureComponent {
     };
 
     handleClose = () => {
+        this.props.onInteract();
         this.setState({ ...INITIAL_STATE });
     };
 
@@ -35,7 +36,7 @@ class ModalType extends PureComponent {
         if (e) e.preventDefault();
 
         const { isLoading }                 = this.state;
-        const { apiAdapter } = this.props;
+        const { apiAdapter }                = this.props;
         const { fields, labels }            = this.props.schema;
 
         if (isLoading) return;
@@ -73,9 +74,13 @@ class ModalType extends PureComponent {
         const { fields, autofill } = this.props.schema;
         const data = {};
 
+        console.log(this);
+
         fields
             .filter(field => this[field.name])
             .forEach(field => data[field.name] = this[field.name].getValue());
+
+        console.log(data);
 
         this.setState({ data });
 
@@ -187,5 +192,3 @@ class ModalType extends PureComponent {
         );
     }
 }
-
-export default ModalType;

@@ -1,11 +1,13 @@
-.Recepts {
+.Recipes {
     min-height: calc(100vh - 135px);
     margin: 10px 10%;
     display: flex;
     flex-wrap: wrap;
     flex-grow: 1;
+    position: relative;
+    padding-bottom: 35px;
 
-    .Recepts_empty {
+    .Recipes_empty {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -16,15 +18,16 @@
     }
 
     .Paginator {
-        margin-top: 10px;
+        position: absolute;
+        bottom: 0;
         display: flex;
-        flex-grow: 1;
+        width: 100%;
         justify-content: center;
     }
 }
 
 @media (max-width: 575px) {
-    .Recepts {
+    .Recipes {
         min-height: calc(100vh - 195px);
         flex-direction: column;
         align-items: center;
@@ -32,7 +35,7 @@
 }
 
 @media (max-width: 265px) {
-    .Recepts {
+    .Recipes {
         min-height: calc(100vh - 230px);
     }
 }

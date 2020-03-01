@@ -1,4 +1,4 @@
-.Recept {
+.Recipe {
     border: 1px solid #1890ff;
     margin-left: 5px;
     margin-top: 5px;
@@ -12,19 +12,25 @@
     flex-direction: column;
     align-items: center;
 
-    .Recept_Title {
+    .Recipe_Title, .Recipe_Description, .Recipe_Description, .Recipe_Guide, .Recipe_Ingredients {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+    }
+
+    .Recipe_Title {
         margin-top: 10px;
         font-size: 32px;
         color: #1890ff;
         text-align: center;
     }
 
-    .Recept_Description {
+    .Recipe_Description {
         font-size: 18px;
         text-align: center;
     }
 
-    .Recept_Guide, .Recept_Ingredients {
+    .Recipe_Guide, .Recipe_Ingredients {
         min-height: 70px;
         font-size: 14px;
         align-self: start;
@@ -36,22 +42,22 @@
         align-items: center;
     }
 
-    .Recept_Guide {
+    .Recipe_Guide {
         margin-top: 10px;
     }
 
-    .Recept_Ingredients {
+    .Recipe_Ingredients {
         border-bottom: 1px solid #ff1878;
     }
 
-    .Recept_Created {
+    .Recipe_Created {
         position: absolute;
         left: 10px;
         top: 10px;
         font-size: 12px;
     }
 
-    .Recept_Delete {
+    .Recipe_Delete {
         position: absolute;
         top: 10px;
         right: 10px;
@@ -62,7 +68,7 @@
         }
     }
 
-    .Recept_Options {
+    .Recipe_Options {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -88,25 +94,25 @@
 }
 
 @media (min-width: 1200px) {
-    .Recept {
+    .Recipe {
         width: calc(33.5% - 9px);
     }
 }
 
 @media (max-width: 1200px) and (min-width: 850px) {
-    .Recept {
+    .Recipe {
         width: calc(34% - 12px);
     }
 }
 
 @media (max-width: 850px) and (min-width: 575px) {
-    .Recept {
+    .Recipe {
         width: calc(50% - 10px);
     }
 }
 
 @media (max-width: 575px) {
-    .Recept {
+    .Recipe {
         width: 75%;
     }
 }

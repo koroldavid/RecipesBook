@@ -1,17 +1,17 @@
 import React                           from 'react';
 import { connect }                     from 'react-redux';
 import { Link }                        from 'react-router-dom';
-import ModalType                       from '../components/ModalType';
+import ModalCreate                       from '../components/ModalCreate';
 import logo                            from '../icons/logo.svg';
 import { ModalCreate as createSchema } from './../utils/schemes';
-import { createRecept }                from '../actions/recepts';
+import * as RecipesAction              from '../actions/recipes';
 
 import './Header.scss';
 
 
 function Header(props) {
     const apiAdapter = {
-        create : props.createRecept
+        create : props.createRecipe
     }
 
     return (
@@ -21,13 +21,14 @@ function Header(props) {
                 <div className='Logo_title'>Recipe Book</div>
             </Link>
             <div className='Header_Button'>
-                <ModalType 
+                <ModalCreate 
                     schema={createSchema}
                     apiAdapter={apiAdapter}
+                    onInteract={props.getRecipes}
                 />
             </div>
         </header>
     );
 }
 
-export default connect(null, {createRecept})(Header);
+export default connect(null, RecipesAction)(Header);

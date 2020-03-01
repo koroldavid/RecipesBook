@@ -1,4 +1,4 @@
-.ReceptDetail {
+.RecipeDetail {
     min-height: calc(100vh - 150px);
     margin: 10px 10%;
     padding: 100px 0;
@@ -36,18 +36,18 @@
 }
 
 @media (max-width: 575px) {
-    .ReceptDetail {
+    .RecipeDetail {
         min-height: calc(100vh - 195px);
     }
 }
 
 @media (max-width: 265px) {
-    .ReceptDetail {
+    .RecipeDetail {
         min-height: calc(100vh - 230px);
     }
 }
 
-.Recepts {
+.Recipes {
     min-height: calc(100vh - 135px);
     margin: 10px 10%;
     display: flex;
@@ -55,7 +55,7 @@
 }
 
 @media (max-width: 575px) {
-    .Recepts {
+    .Recipes {
         min-height: calc(100vh - 195px);
         flex-direction: column;
         align-items: center;
@@ -63,7 +63,7 @@
 }
 
 @media (max-width: 265px) {
-    .Recepts {
+    .Recipes {
         min-height: calc(100vh - 230px);
     }
 }

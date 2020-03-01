@@ -1,38 +1,39 @@
 import React, { PureComponent }     from 'react';
 import { connect }                  from 'react-redux';
 import { Pagination, notification } from 'antd';
-import Recept                       from '../components/Recept';
+import Recipe                       from '../components/Recipe';
 import Loader                       from '../components/Loader';
-import * as ReceptsAction           from '../actions/recepts';
+import * as RecipesAction           from '../actions/recipes';
+import api                          from '../apiSingleton';
 
-import './Recepts.scss';
+import './Recipes.scss';
 
-class Recepts extends PureComponent {
+class Recipes extends PureComponent {
     constructor(props) {
         super(props);
     
-        this.changePage     = this.changePage.bind(this);
-        this.changePageSize = this.changePageSize.bind(this);
+        this.loadRecipes       = this.loadRecipes.bind(this);
+        this.changePage        = this.changePage.bind(this);
+        this.changePageSize    = this.changePageSize.bind(this);
+        this.asyncDeleteRecipe = this.asyncDeleteRecipe.bind(this);
     }
 
     state = {
-        perPage   : 6,
-        page      : 1,
         isLoading : true
     }
 
     componentDidMount() {
-        const { page, perPage } = this.state
-        const params = { page, perPage };
-
-        this.loadContent(params)
+        this.loadRecipes();
     }
 
-    async loadContent (params) {
+    async loadRecipes () {
         try {
-            this.setState({isLoading : true})
+            const { page, perPage } = this.props;
+            const params = { page, perPage };
 
-            await this.props.getRecepts(params);
+            await this.setState({isLoading : true})
+
+            await this.props.getRecipes(params);
 
             this.setState({isLoading : false})
         } catch (error) {
@@ -47,11 +48,9 @@ class Recepts extends PureComponent {
 
     async changePageSize(page, perPage) {
         try {
-            const params = { page, perPage };
+            await this.props.paginationChange({ page, perPage });
 
-            await this.loadContent(params);
-
-            this.setState({ page, perPage });
+            await this.loadRecipes();
         } catch (error) {
             notification.error({
                 message     : 'Error occur',
@@ -62,11 +61,9 @@ class Recepts extends PureComponent {
 
     async changePage(page, perPage) {
         try {
-            const params = { page, perPage };
+            await this.props.paginationChange({ page, perPage });
 
-            await this.loadContent(params);
-
-            this.setState({ page });
+            await this.loadRecipes();
         } catch (error) {
             notification.error({
                 message     : 'Error occur',
@@ -75,28 +72,41 @@ class Recepts extends PureComponent {
         }
     }
 
+    async asyncDeleteRecipe(id) {
+        try {
+            await api.recipes.delete(id);
+            await this.loadRecipes();
+        } catch (error) {
+            notification.error({
+                message     : 'Error occure',
+                description : error.message
+            });
+        }
+    }
+
     render() {
-        const { recepts, getRecepts, updateRecet, total } = this.props;
-        const { perPage, page, isLoading } =this.state;
+        const { recipes, updateRecipe, total, perPage, page } = this.props;
+        const { isLoading } =this.state;
 
         if (isLoading) return (
-            <div className ='Recepts'>
+            <div className ='Recipes'>
                 <Loader />
             </div>
         )
 
         return (
-            <div className ='Recepts'>
+            <div className ='Recipes'>
                 {
-                    recepts.length ? 
+                    recipes.length ? 
                         <React.Fragment>
                             {
-                                recepts.map(recept => {
-                                    return <Recept 
-                                        key={recept.id}
-                                        data={recept} 
-                                        getRecepts={getRecepts}
-                                        updateRecet={updateRecet}
+                                recipes.map(recipe => {
+                                    return <Recipe 
+                                        key={recipe._id}
+                                        data={recipe}
+                                        getRecipes={this.loadRecipes}
+                                        updateRecipe={updateRecipe}
+                                        deleteRecipe={this.asyncDeleteRecipe}
                                     />
                                 })
                             }
@@ -114,7 +124,7 @@ class Recepts extends PureComponent {
                                 />
                             </div>
                         </React.Fragment>
-                    : <div className='Recepts_empty'>No recipts. Please create your new recipt</div>
+                    : <div className='Recipes_empty'>No recipts. Please create your new recipt</div>
                 }
             </div>
         );
@@ -123,10 +133,12 @@ class Recepts extends PureComponent {
 
 function mapStateToProps(state) {
     return {
-        recepts : state.recepts.recepts,
-        total   : state.recepts.receptsTotal
+        recipes : state.recipes.recipes,
+        total   : state.recipes.total,
+        page    : state.recipes.page,
+        perPage : state.recipes.perPage
     };
 }
 
-export default connect(mapStateToProps, ReceptsAction)(Recepts);
+export default connect(mapStateToProps, RecipesAction)(Recipes);
 

@@ -2,14 +2,14 @@ import React, { PureComponent }   from 'react';
 import { connect }                from 'react-redux';
 import { Carousel, notification } from 'antd';
 import { withRouter }             from "react-router";
-import ReceptHistory              from '../components/ReceptHistory';
+import RecipeHistory              from '../components/RecipeHistory';
 import Loader                     from '../components/Loader';
-import * as ReceptsAction         from '../actions/recepts';
+import * as RecipesAction         from '../actions/recipes';
 
-import './ReceptDetail.scss';
+import './RecipeDetail.scss';
 
 
-class ReceptDetail extends PureComponent {
+class RecipeDetail extends PureComponent {
     state = {
         isLoading : true
     }
@@ -24,7 +24,7 @@ class ReceptDetail extends PureComponent {
         try {
             this.setState({isLoading : true})
 
-            await this.props.showRecept(id);
+            await this.props.showRecipe(id);
 
             this.setState({isLoading : false})
         } catch (error) {
@@ -33,27 +33,27 @@ class ReceptDetail extends PureComponent {
                 description : error.message
             });
 
-            this.props.history.push('/recepts');
+            this.props.history.push('/recipes');
         }
     }
 
     render() {
         const { isLoading } = this.state;
-        const { receptHistory } = this.props;
+        const { recipeHistory } = this.props;
 
         if (isLoading) return (
-            <div className='Recepts'>
+            <div className='Recipes'>
                 <Loader />
             </div>
         )
 
         return (
-            <div className ='ReceptDetail'>
+            <div className ='RecipeDetail'>
                 <div className='Carousel_Wrapper'>
                     <Carousel >
                         {
-                            receptHistory.map(recept => {
-                                return <ReceptHistory key={recept.version} data={recept} />
+                            recipeHistory.map(recipe => {
+                                return <RecipeHistory key={recipe.version} data={recipe} />
                             })
                         }
                     </Carousel>
@@ -63,15 +63,15 @@ class ReceptDetail extends PureComponent {
     }
 }
 
-const RoutedDetail = withRouter(ReceptDetail)
+const RoutedDetail = withRouter(RecipeDetail)
 
 function mapStateToProps(state) {
     return {
-        receptHistory : state.recepts.receptHistory,
+        recipeHistory : state.recipes.recipeHistory,
     };
 }
 
-export default connect(mapStateToProps, ReceptsAction)(RoutedDetail);
+export default connect(mapStateToProps, RecipesAction)(RoutedDetail);
 
 
 

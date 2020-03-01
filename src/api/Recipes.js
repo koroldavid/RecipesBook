@@ -8,10 +8,8 @@ export default class Borrowers extends Base {
                 offset : params.perPage * (params.page - 1),
                 limit  : params.perPage
             }
-
-            const { data = [] } = await this.apiClient.get('/recepts', queryParams);
-
-            return data;
+            
+            return await this.apiClient.get('/recipes', queryParams);
         } catch (error) {
            throw error
         }
@@ -19,7 +17,7 @@ export default class Borrowers extends Base {
 
     create = async (body) => {
         try {
-            return await this.apiClient.post('/recepts', body);
+            return await this.apiClient.post('/recipes', body);
         } catch (error) {
             throw error;
         }
@@ -27,9 +25,7 @@ export default class Borrowers extends Base {
 
     show = async (id) => {
         try {
-            const { data = {} } = await this.apiClient.get(`/recepts/${id}`);
-
-            return data;
+            return await this.apiClient.get(`/recipes/${id}`);
         } catch (error) {
             throw error;
         }
@@ -37,7 +33,7 @@ export default class Borrowers extends Base {
 
     edit = async (body) => {
         try {
-            return await this.apiClient.put(`/recepts/${body.id}`, {...body});
+            return await this.apiClient.put(`/recipes/${body._id}`, {...body});
         } catch (error) {
             throw error;
         }
@@ -45,9 +41,7 @@ export default class Borrowers extends Base {
 
     delete = async (id) => {
         try {
-            const { data = {} } = await this.apiClient.delete(`/recepts/${id}`);
-
-            return data;
+            return await this.apiClient.delete(`/recipes/${id}`);
         } catch (error) {
             throw error;
         }

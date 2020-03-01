@@ -39,10 +39,10 @@ export const ModalCreate = {
 }
 
 export const ModalUpdate = {
-    handler : ({item}) => api.recepts.edit(item.id),
+    handler : ({item}) => api.recipes.edit(item),
     trigger : {
         type  : 'primary',
-        label : 'Edite',
+        label : 'Edit',
         icon  : 'edit',
         size  : 'large'
     },

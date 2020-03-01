@@ -2,8 +2,8 @@ import React                               from 'react';
 import { Router, Switch, Redirect, Route } from 'react-router-dom';
 import history                             from './history';
 import MainLayout                          from './layout/MainLayout';
-import Recepts                            from './pages/Recepts';
-import ReceptDetail                        from './pages/ReceptDetail';
+import Recipes                            from './pages/Recipes';
+import RecipeDetail                        from './pages/RecipeDetail';
 
 function dummyLayout(props) {
   return props.children;
@@ -33,10 +33,10 @@ export default class App extends React.Component {
       return (
           <Router history={history}>
               <Switch>
-                    <AppRoute  component={Recepts} path='/recepts' exact />
-                    <AppRoute  component={ReceptDetail} path='/recept/:id' exact />
+                    <AppRoute  component={Recipes} path='/recipes'  />
+                    <AppRoute  component={RecipeDetail} path='/recipe/:id'  />
 
-                    <Redirect from='*' to='/recepts' />
+                    <Redirect from='*' to='/recipes' />
               </Switch>
           </Router>
       );
