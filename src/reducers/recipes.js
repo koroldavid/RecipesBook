@@ -8,40 +8,7 @@ const initialState = {
     perPage : 6,
     total   : 0,
     recipes : [],
-    recipeHistory : [
-        {
-            title       : 'Recipe Title',
-            description : 'Recipe Description',
-            guide       : 'Recipe Guide',
-            ingredients : 'Recipe Ingridients',
-            dateCreated : '2020.28.02 03.45',
-            version     : 1
-        },
-        {
-            title       : 'Recipe Title',
-            description : 'Recipe Description',
-            guide       : 'Recipe Guide',
-            ingredients : 'Recipe Ingridients',
-            dateCreated : '2020.28.02 03.45',
-            version     : 2
-        },
-        {
-            title       : 'Recipe Title',
-            description : 'Recipe Description',
-            guide       : 'Recipe Guide',
-            ingredients : 'Recipe Ingridients',
-            dateCreated : '2020.28.02 03.45',
-            version     : 3
-        },
-        {
-            title       : 'Recipe Title',
-            description : 'Recipe Description',
-            guide       : 'Recipe Guide',
-            ingredients : 'Recipe Ingridients',
-            dateCreated : '2020.28.02 03.45',
-            version     : 4
-        }
-    ]
+    recipeHistory : []
 };
 
 /* eslint-disable no-param-reassign, default-case, no-case-declarations */
